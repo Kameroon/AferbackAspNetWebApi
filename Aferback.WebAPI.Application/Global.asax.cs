@@ -29,19 +29,7 @@ namespace Aferback.WebAPI.Application
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Initialiaze();
             _logger.Debug("==============>  [Application start] Fin initailisation.  <================");
-        }
-
-        private void Initialiaze()
-        {
-            //IUnityContainer container = new UnityContainer();
-
-            //_logger.Debug("==============> [Initialize] Debut enregistrement des types.  <================");
-            //container.RegisterType<IEmployeeRepository, EmployeeRepository>();
-            //container.RegisterType<IEmployee, Employee>();
-
-            //_logger.Debug("==============> [Initialize] Fin enregistrement des types.  <================");
         }
     }
 }
