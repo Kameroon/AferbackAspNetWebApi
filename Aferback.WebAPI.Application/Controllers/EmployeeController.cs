@@ -1,4 +1,5 @@
-﻿using Aferback.Model.Implementations;
+﻿using Aferback.Model.Contracts;
+using Aferback.Model.Implementations;
 using Aferback.Repository.Contracts;
 using Aferback.Repository.Implementations;
 using System;
@@ -12,6 +13,7 @@ namespace Aferback.WebAPI.Application.Controllers
 {
     public class EmployeeController : ApiController
     {
+
         // https://dotnettutorials.net/lesson/post-method-in-web-api/
         // - UnitTest - https://docs.microsoft.com/fr-fr/aspnet/web-api/overview/testing-and-debugging/unit-testing-controllers-in-web-api
 
@@ -20,21 +22,21 @@ namespace Aferback.WebAPI.Application.Controllers
         #endregion
 
         #region -- Contructor --
-        public EmployeeController()
+        public EmployeeController(IEmployeeRepository employeeRepository)
         {
-            _employeeRepository = new EmployeeRepository();
+            _employeeRepository = employeeRepository;
         }
         #endregion
 
         #region -- Methods --
         // GET: api/Employee
-        public IEnumerable<Employee> Get()
+        public IEnumerable<IEmployee> Get()
         {
             return _employeeRepository.GetAll();
         }
-
+        
         // GET: api/Employee/5
-        public Employee Get(int id)
+        public IEmployee Get(int id)
         {
             if (id <= 0)
             {
@@ -45,7 +47,7 @@ namespace Aferback.WebAPI.Application.Controllers
 
         [Route("api/Employee/GetByName/{name}")]
         [HttpGet]
-        public Employee GetByName(string name)
+        public IEmployee GetByName(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -54,8 +56,9 @@ namespace Aferback.WebAPI.Application.Controllers
             return _employeeRepository.GetByName(name);
         }
 
-        // POST: api/Employee
-        public void Post(Employee employee)
+        // POST: api/Test
+        //public void Post([FromBody]string value)
+        public void Post(IEmployee employee)
         {
             if (!ModelState.IsValid)
             {
@@ -65,7 +68,8 @@ namespace Aferback.WebAPI.Application.Controllers
             _employeeRepository.AddNew(employee);
         }
 
-        // PUT: api/Employee/5
+        // PUT: api/Test/5
+        //public void Put(int id, [FromBody]string value)
         public void Put(Employee employee)
         {
             if (employee == null)
@@ -81,7 +85,7 @@ namespace Aferback.WebAPI.Application.Controllers
             }
         }
 
-        // DELETE: api/Employee/5
+        // DELETE: api/Test/5
         public void Delete(int id)
         {
             if (id <= 0)
@@ -94,32 +98,6 @@ namespace Aferback.WebAPI.Application.Controllers
             if (result)
             {
 
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <returns></returns>
-        public HttpResponseMessage Add([FromBody] Employee employee)
-        {
-            try
-            {
-                //using (EmployeeDBContext dbContext = new EmployeeDBContext())
-                //{
-                //    dbContext.Employees.Add(employee);
-                //    dbContext.SaveChanges();
-                //    var message = Request.CreateResponse(HttpStatusCode.Created, employee);
-                //    message.Headers.Location = new Uri(Request.RequestUri +
-                //        employee.ID.ToString());
-                //    return message;
-                //}
-                return null;
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
         #endregion

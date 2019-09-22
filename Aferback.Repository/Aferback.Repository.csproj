@@ -61,9 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ICustomerRepository.cs" />
     <Compile Include="Contracts\IEmployeeRepository.cs" />
+    <Compile Include="Contracts\IFactory.cs" />
+    <Compile Include="Contracts\IGenericRepository.cs" />
     <Compile Include="Helpers\EmployeeHelper.cs" />
+    <Compile Include="Implementations\CustomerRepository.cs" />
     <Compile Include="Implementations\EmployeeRepository.cs" />
+    <Compile Include="Implementations\Factory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

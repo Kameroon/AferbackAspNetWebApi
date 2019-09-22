@@ -1,4 +1,5 @@
-﻿using Aferback.Model.Implementations;
+﻿using Aferback.Model.Contracts;
+using Aferback.Model.Implementations;
 using NLog;
 
 namespace Aferback.Repository.Helpers
@@ -7,7 +8,7 @@ namespace Aferback.Repository.Helpers
     {
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public static Employee ManageResult(Employee employee, string paramName, string methodeName)
+        public static IEmployee ManageResult(IEmployee employee, string paramName, string methodeName)
         {
             if (employee != null)
             {
